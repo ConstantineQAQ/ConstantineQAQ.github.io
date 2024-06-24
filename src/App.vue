@@ -1,9 +1,10 @@
 <script setup lang="ts">
+import Home from './views/Home.vue'
 </script>
 
 <template>
 <header>
-  <h1>ConstantineQAQ's Blog</h1>
+    <Home />
 </header>
 
 </template>
