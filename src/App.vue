@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import Home from './views/Home.vue'
+import Topnavigation from './components/Topnavigation.vue'
 </script>
 
 <template>
-<header>
+    <!-- <Topnavigation /> -->
     <Home />
-</header>
-
 </template>
 
 <style scoped>
+
 </style>

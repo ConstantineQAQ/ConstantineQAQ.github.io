@@ -1,38 +1,67 @@
 <template>
     <body>
+        <div class="top">
+        
+        </div>
         <div class="home_words">
             <p :class="{ 'fade-in-down': animate }">欢迎光临👏</p>
             <p :class="{ 'fade-in-down': animate }" style="animation-delay: 0.5s;">
                 <Typing :strings="['王亚宁的个人博客网站', 'Java后端开发工程师','爱好前端😊']" class="home_typing" />
             </p>
             <strong :class="{ 'fade-in-down': animate }" style="animation-delay: 0.5s;">本平台仍在不断优化中...</strong>
+            <div class="content_cards">
+                <div class="content_card" v-for="(card, index) in cards" :key="index">
+                    <Card :card="card" />
+                </div>
+            </div>
         </div>
     </body>
 </template>
 
 <script setup>
 import Typing from '@/components/Typing.vue'
+import Card from '@/components/Card.vue'
 import { ref, onMounted } from 'vue';
 
+const cards = ref([
+    {
+        title: '毕业纪念',
+        img: new URL('../assets/images/Me.png', import.meta.url).href,
+        year: '2024',
+        month: '06',
+        day: '20'
+    },
+]);
 const animate = ref(false);
 
 onMounted(() => {
     animate.value = true;
 });
+
+window.onscroll = function () {
+    var scrollTop = document.documentElement.scrollTop || document.body.scrollTop
+    var top = document.querySelector('.top')
+    if (scrollTop >= 100) {
+      top.style.position = 'fixed'
+      top.style.top = '0'
+    } else {
+      top.style.position = 'static'
+    }
+}
 </script>
 
 <style scoped>
-body {
-    /* 100%窗口高度 */
-    height: 100vh;
-    /* 弹性布局 水平+垂直居中 */
-    display: flex;
-    justify-content: center;
-    /* 渐变背景 */
-    background: linear-gradient(200deg, #f3e7e9, #e3eeff);
-}
 
+.top {
+    width: 100%;
+    height: 100px;
+    background-color: #cbd7b4;
+}
 .home_words {
+    height: 200vh;
+    justify-content: center;
+    background: #f1f6ec;
+    width: 100%;
     font-size: 2rem;
     color: #333;
     text-align: center;
@@ -40,6 +69,19 @@ body {
     .home_typing {
         font-size: 4rem;
         color: #666;
+    }
+}
+.content_cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: stretch; /* 确保每一行的Card高度一致 */
+    padding: 20px;
+    background: #f1f6ec;
+    .content_card {
+        width: calc(25% - 40px); /* 每行四个Card，减去padding */
+        padding: 20px;
+        box-sizing: border-box; /* 包括padding在内的宽度计算 */
     }
 }
 
