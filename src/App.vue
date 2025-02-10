@@ -5,7 +5,7 @@ import Topnavigation from './components/Topnavigation.vue'
 
 <template>
     <!-- <Topnavigation /> -->
-    <Home />
+    <router-view />
 </template>
 
 <style scoped>

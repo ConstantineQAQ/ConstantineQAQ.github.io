@@ -22,20 +22,29 @@
 import Typing from '@/components/Typing.vue'
 import Card from '@/components/Card.vue'
 import { ref, onMounted } from 'vue';
+import axios from 'axios'
 
 const cards = ref([
-    {
+{
+        id:1,
         title: '毕业纪念',
         img: new URL('../assets/images/Me.png', import.meta.url).href,
         year: '2024',
-        month: '06',
+        month: 'june',
         day: '20'
-    },
-]);
+    }
+]
+);
 const animate = ref(false);
 
-onMounted(() => {
-    animate.value = true;
+onMounted(async () => {
+    try {
+        const res = await axios.get('http://your-backend/cards')
+        cards.value = res.data
+        animate.value = true
+    } catch (e) {
+        console.error(e)
+    }
 });
 
 window.onscroll = function () {

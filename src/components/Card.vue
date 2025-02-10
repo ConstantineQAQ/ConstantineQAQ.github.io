@@ -1,5 +1,5 @@
 <template>
-    <div class="example-1 common-card">
+    <div class="example-1 common-card" @click="goto" style="cursor: pointer;">
         <div class="wrapper">
             <img :src="card.img" alt="Card image">
             <div class="date">
@@ -9,7 +9,7 @@
             </div>
             <div class="data">
                 <div class="content">
-                    <h1 class="title"><a href="#">{{ card.title }}</a></h1>
+                    {{ card.title }}
                 </div>
             </div>
         </div>
@@ -18,13 +18,22 @@
 
 <script>
 import { defineComponent } from 'vue';
+import { useRouter } from 'vue-router';
+
 export default defineComponent({
-	props: {
-		card: {
-			type: Object,
-			required: true
-		}
-	}
+    props: {
+        card: {
+            type: Object,
+            required: true
+        }
+    },
+    setup(props) {
+        const router = useRouter();
+        const goto = () => {
+            router.push({ name: 'CardDetail', params: { id: props.card.id } });
+        };
+        return { goto };
+    }
 });
 </script>
 
@@ -47,22 +56,26 @@ a {
 .common-card {
     padding: 0px 20px;
     margin: 10px 0;
+
     .wrapper {
         background-color: $white;
         position: relative;
         overflow: hidden;
         box-shadow: 0 19px 38px rgba($black, 0.3), 0 15px 12px rgba($black, 0.2);
         border-radius: 10px;
+
         img {
             width: 100%;
             height: auto;
             display: block;
         }
     }
+
     .data {
         position: absolute;
         bottom: 0;
         width: 100%;
+
         .content {
             padding: 1em;
             position: relative;
@@ -82,26 +95,25 @@ a {
         background-color: $bermuda;
         color: $white;
         padding: 0.8em;
+
         span {
             display: block;
             text-align: center;
         }
+
         .day {
             font-weight: 700;
             font-size: 24px;
             text-shadow: 2px 3px 2px rgba($black, 0.18);
         }
+
         .month {
             text-transform: uppercase;
         }
+
         .month,
         .year {
             font-size: 12px;
-        }
-    }
-    .title {
-        a {
-            color: lighten($black, 50%);
         }
     }
 }
