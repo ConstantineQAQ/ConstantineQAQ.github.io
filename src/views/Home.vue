@@ -94,6 +94,13 @@ window.onscroll = function () {
     }
 }
 
+/* 针对手机优化，屏幕宽度小于 600px 时改为 100%宽度 */
+@media (max-width: 600px) {
+  .content_cards .content_card {
+      width: calc(100% - 40px);
+  }
+}
+
 .fade-in-down {
     opacity: 0;
     transform: translateY(20px);

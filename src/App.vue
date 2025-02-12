@@ -9,5 +9,4 @@ import Topnavigation from './components/Topnavigation.vue'
 </template>
 
 <style scoped>
-
 </style>
